@@ -1,4 +1,3 @@
-cat << 'EOF' > Dockerfile
 FROM python:3.10-slim
 
 WORKDIR /app
@@ -17,7 +16,7 @@ COPY data ./data
 ENV PYTHONUNBUFFERED=1
 
 CMD ["bash"]
-EOF
+
 
 
 
