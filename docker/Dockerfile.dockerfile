@@ -11,13 +11,14 @@ RUN pip install --no-cache-dir -r requirements.txt
 RUN mkdir -p /app/jars && \
     curl -L -o /app/jars/postgresql-42.7.3.jar https://jdbc.postgresql.org/download/postgresql-42.7.3.jar
 
-COPY ../src ./src
-COPY ../data ./data
+COPY src ./src
+COPY data ./data
 
 ENV PYTHONUNBUFFERED=1
 
 CMD ["bash"]
 EOF
+
 
 
 
