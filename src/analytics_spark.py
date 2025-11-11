@@ -31,6 +31,7 @@ spark = (
     .appName("Project-1-Task2")
     .master("local[*]")
     .config("spark.driver.host", "0.0.0.0")
+    .config("spark.jars", "/app/postgresql-42.7.3.jar")
     .getOrCreate()
 )
 
@@ -129,5 +130,6 @@ def nationality_histogram(df, top_n=20):
     plt.show()
 
     return dedup
+
 
 nationality_histogram(df, top_n=15)
