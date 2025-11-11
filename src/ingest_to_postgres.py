@@ -1,6 +1,4 @@
 import findspark
-findspark.init()
-findspark.find()
 
 import pyspark
 import psycopg2
@@ -23,7 +21,7 @@ spark = (
     .appName("Project-1")
     .master("local[*]")
     .config("spark.driver.host", "0.0.0.0")
-    .config("spark.jars", "/app/postgresql-42.7.3.jar")
+    .config("spark.jars", "/app/jars/postgresql-42.7.3.jar")
     .getOrCreate()
 )
 
@@ -186,5 +184,6 @@ print("Show Schema: ")
 df_read = spark.read.format("jdbc").options(**db_properties).load()
 df_read.printSchema()
 print("-----------------------------------")
+
 
 
