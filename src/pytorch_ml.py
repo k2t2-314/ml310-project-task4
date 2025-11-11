@@ -47,6 +47,7 @@ spark = (
     .appName("Project-1-ML")
     .master("local[*]")
     .config("spark.driver.host", "0.0.0.0")
+    .config("spark.jars", "/app/postgresql-42.7.3.jar")
     .getOrCreate()
 )
 
@@ -591,3 +592,4 @@ deep_model.eval()
 deep_test_mse, deep_test_rmse = eval_on_test(deep_model, test_loader, device)
 print(f"[Deep Best] val_RMSE = {best_deep_cfg['best_val_rmse']:.4f}, "
       f"test_MSE = {deep_test_mse:.4f}, test_RMSE = {deep_test_rmse:.4f}")
+
