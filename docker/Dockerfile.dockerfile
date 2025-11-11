@@ -5,7 +5,7 @@ WORKDIR /app
 
 RUN apt-get update && apt-get install -y default-jdk curl && rm -rf /var/lib/apt/lists/*
 
-COPY ../requirements.txt .
+COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 RUN mkdir -p /app/jars && \
@@ -18,5 +18,6 @@ ENV PYTHONUNBUFFERED=1
 
 CMD ["bash"]
 EOF
+
 
 
