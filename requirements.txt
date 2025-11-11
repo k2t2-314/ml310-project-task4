@@ -1,7 +1,21 @@
-pyspark
-psycopg2-binary
-torch
-pandas
-scikit-learn
-findspark
+# ===== Core ML / DL =====
+torch==2.3.1+cpu
+--extra-index-url https://download.pytorch.org/whl/cpu
+scikit-learn==1.5.2
+pandas==2.2.3
+numpy==1.26.4
+
+# ===== Spark Integration =====
+pyspark==3.5.1
+findspark==2.0.1
+
+# ===== Database & Data IO =====
+psycopg2-binary==2.9.9
+
+# ===== Utilities =====
+jinja2==3.1.4
+python-dateutil==2.9.0.post0
+pytz==2025.2
+
+
 
