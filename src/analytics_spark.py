@@ -1,7 +1,5 @@
 import findspark
 import os
-findspark.init()
-findspark.find()
 
 import pyspark
 from pyspark.sql import SparkSession, SQLContext
@@ -31,7 +29,7 @@ spark = (
     .appName("Project-1-Task2")
     .master("local[*]")
     .config("spark.driver.host", "0.0.0.0")
-    .config("spark.jars", "/app/postgresql-42.7.3.jar")
+    .config("spark.jars", "/app/jars/postgresql-42.7.3.jar")
     .getOrCreate()
 )
 
@@ -133,3 +131,4 @@ def nationality_histogram(df, top_n=20):
 
 
 nationality_histogram(df, top_n=15)
+
