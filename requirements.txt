@@ -3,3 +3,5 @@ psycopg2-binary
 torch
 pandas
 scikit-learn
+findspark
+
