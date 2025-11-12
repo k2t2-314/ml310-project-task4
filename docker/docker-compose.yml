@@ -66,3 +66,21 @@ services:
       DB_PASSWORD: 20030218
     command: ["python", "src/pytorch_ml.py"]
     restart: "no"
+
+  task4:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    container_name: fifa-task4
+    depends_on:
+      task3:
+        condition: service_completed_successfully
+    environment:
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_NAME: postgres
+      DB_USER: postgres
+      DB_PASSWORD: 20030218
+    command: ["python", "src/spark_ml.py"]
+    restart: "no"
+
