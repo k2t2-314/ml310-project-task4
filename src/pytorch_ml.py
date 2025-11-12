@@ -327,18 +327,24 @@ class DeepMLP(nn.Module):
         return self.net(x).squeeze(-1)
     
 # Shallow MLP
-shallow_lrs = [0.005, 0.01, 0.015]
-shallow_batches = [128, 256]
-shallow_epochs = [20, 40]
+# shallow_lrs = [0.005, 0.01, 0.015]
+# shallow_batches = [128, 256]
+# shallow_epochs = [20, 40]
+shallow_lrs = [0.01]
+shallow_batches = [128]
+shallow_epochs = [20]
 shallow_hypers = [
     {"lr": lr, "batch_size": bs, "epochs": ep}
     for lr, bs, ep in itertools.product(shallow_lrs, shallow_batches, shallow_epochs)
 ]
 
 # Deep MLP
-deep_lrs = [0.001, 0.003, 0.005]
-deep_batches = [128, 256]
-deep_epochs = [20, 40, 60]
+# deep_lrs = [0.001, 0.003, 0.005]
+# deep_batches = [128, 256]
+# deep_epochs = [20, 40, 60]
+deep_lrs = [0.003]
+deep_batches = [128]
+deep_epochs = [40]
 deep_hypers = [
     {"lr": lr, "batch_size": bs, "epochs": ep}
     for lr, bs, ep in itertools.product(deep_lrs, deep_batches, deep_epochs)
@@ -590,5 +596,3 @@ deep_model.eval()
 deep_test_mse, deep_test_rmse = eval_on_test(deep_model, test_loader, device)
 print(f"[Deep Best] val_RMSE = {best_deep_cfg['best_val_rmse']:.4f}, "
       f"test_MSE = {deep_test_mse:.4f}, test_RMSE = {deep_test_rmse:.4f}")
-
-

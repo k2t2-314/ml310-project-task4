@@ -129,6 +129,4 @@ def nationality_histogram(df, top_n=20):
 
     return dedup
 
-
 nationality_histogram(df, top_n=15)
-

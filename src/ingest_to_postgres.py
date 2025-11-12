@@ -1,5 +1,4 @@
 import findspark
-
 import pyspark
 import psycopg2
 from pyspark.sql import SparkSession, SQLContext
@@ -184,6 +183,4 @@ print("Show Schema: ")
 df_read = spark.read.format("jdbc").options(**db_properties).load()
 df_read.printSchema()
 print("-----------------------------------")
-
-
 
