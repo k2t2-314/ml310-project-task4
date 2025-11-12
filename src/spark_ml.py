@@ -234,25 +234,15 @@ print(f"Train count: {df_train.count()}")
 print(f"Validation count: {df_val.count()}")
 print(f"Test count: {df_test.count()}")
 
-df_train.write.mode("overwrite").parquet(
-    "gs://dataproc-staging-asia-northeast3-212213307292-nwhndbka/fifa/processed/v1/df_train"
-)
-df_val.write.mode("overwrite").parquet(
-    "gs://dataproc-staging-asia-northeast3-212213307292-nwhndbka/fifa/processed/v1/df_val"
-)
-df_test.write.mode("overwrite").parquet(
-    "gs://dataproc-staging-asia-northeast3-212213307292-nwhndbka/fifa/processed/v1/df_test"
-)
+outdir = "/app/out/spark_ml"
+df_train.write.mode("overwrite").parquet(f"{outdir}/train")
+df_val.write.mode("overwrite").parquet(f"{outdir}/val")
+df_test.write.mode("overwrite").parquet(f"{outdir}/test")
 
-df_train = spark.read.parquet(
-    "gs://dataproc-staging-asia-northeast3-212213307292-nwhndbka/fifa/processed/v1/df_train"
-)
-df_val = spark.read.parquet(
-    "gs://dataproc-staging-asia-northeast3-212213307292-nwhndbka/fifa/processed/v1/df_val"
-)
-df_test = spark.read.parquet(
-    "gs://dataproc-staging-asia-northeast3-212213307292-nwhndbka/fifa/processed/v1/df_test"
-)
+df_train = spark.read.parquet(f"{outdir}/train")
+df_val = spark.read.parquet(f"{outdir}/val")
+df_test = spark.read.parquet(f"{outdir}/test")
+
 
 # Cross-Validation and ParamGrid
 lr = LinearRegression(featuresCol="features", labelCol="overall")
@@ -262,7 +252,7 @@ lr = LinearRegression(featuresCol="features", labelCol="overall")
 #              .build())
 
 lr_paramGrid=(ParamGridBuilder()
-             .addGrid(lr.regParam,[0.01,0.1])
+             .addGrid(lr.regParam,[0.1])
              .addGrid(lr.maxIter,[10])
              .build())
 
@@ -311,7 +301,7 @@ rf = RandomForestRegressor(featuresCol="features",labelCol="overall")
 #              .build())
 
 rf_paramGrid=(ParamGridBuilder()
-             .addGrid(rf.numTrees,[10,20])
+             .addGrid(rf.numTrees,[20])
              .addGrid(rf.maxDepth,[10])
              .build())
 
@@ -325,4 +315,5 @@ rf_cv=CrossValidator(estimator=rf,estimatorParamMaps=rf_paramGrid,
                      evaluator=evaluator_rmse,numFolds=4)
 
 rf_cv_model = rf_cv.fit(df_train)
+
 
